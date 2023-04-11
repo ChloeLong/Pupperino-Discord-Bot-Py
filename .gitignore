@@ -1,0 +1,21 @@
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+*.egg
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*$py.class
+
+# Database stuff
+*.db-journal
+*.db
+
+token.txt
