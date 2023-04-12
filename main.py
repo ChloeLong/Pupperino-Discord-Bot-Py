@@ -9,20 +9,16 @@ class aclient(discord.Client):
         self.synced = False
 
     async def on_ready(self):
-            await self.wait_until_ready()
-            if not self.synced:
-                await tree.sync(guild = discord.Object(id = 1093910311523852390))
-                self.synced = True
-            print(f'We have logged in as {self.user}.')
+        print(f'We have logged in as {self.user}.')
 
 client = aclient()
 tree = app_commands.CommandTree(client)
 
-@tree.command(guild = discord.Object(id=1093910311523852390), name = 'tester', description='testing')
+@tree.command(name = 'ping', description='Simple Ping Command!')
 async def self(interaction: discord.Interaction):
-    await interaction.response.send_message(f'Pong!')
+    await interaction.response.send_message(f'Pong! Command took {round(client.latency, 4)}s round trip!')
 
-@tree.command(guild = discord.Object(id=1093910311523852390), name = 'freegames', description='Free Games on the Epic Games store!')
+@tree.command(name = 'freegames', description='Free Games on the Epic Games store!')
 async def self(interaction: discord.Interaction):
     game_list = Database.retrieveActive()
     embed_list = []
@@ -45,7 +41,7 @@ async def self(interaction: discord.Interaction):
 
     await menu.start()
 
-@tree.command(guild = discord.Object(id=1093910311523852390), name = 'upcomingfreegames', description='Upcoming Free Games on the Epic Games Store!')
+@tree.command(name = 'upcomingfreegames', description='Upcoming Free Games on the Epic Games Store!')
 async def self(interaction: discord.Interaction):
     game_list = Database.retrieveUpcoming()
     embed_list = []
