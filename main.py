@@ -9,6 +9,10 @@ class aclient(discord.Client):
         self.synced = False
 
     async def on_ready(self):
+        await self.wait_until_ready()
+        if not self.synced:
+            await tree.sync()
+            self.synced = True
         print(f'We have logged in as {self.user}.')
 
 client = aclient()
