@@ -3,6 +3,7 @@ from discord import app_commands
 from reactionmenu import ViewMenu, ViewButton
 from EpicGames.api_call import API_Call
 import secret
+import random
 
 class aclient(discord.Client):
     def __init__(self):
@@ -22,6 +23,12 @@ tree = app_commands.CommandTree(client)
 @tree.command(name = 'ping', description='Simple Ping Command!')
 async def self(interaction: discord.Interaction):
     await interaction.response.send_message(f'Pong! Command took {round(client.latency, 4)}s round trip!')
+
+@tree.command(name = 'pet', description='Pet the pup!')
+async def self(interaction: discord.Interaction):
+    pet_response_list = ['Ruff!', 'Arf!!', 'Woof!', 'Bark!']
+
+    await interaction.response.send_message(random.choice(pet_response_list))
 
 @tree.command(name = 'freegames', description='Free Games on the Epic Games store!')
 async def self(interaction: discord.Interaction):
