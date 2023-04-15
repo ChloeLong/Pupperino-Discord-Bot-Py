@@ -1,7 +1,8 @@
 import discord
 from discord import app_commands
 from reactionmenu import ViewMenu, ViewButton
-from EpicGames.api_call import API_Call
+from EpicGames.api_call import Epic_API_Call
+from Steam.api_call import Steam_API_Call
 import secret
 import random
 
@@ -26,17 +27,17 @@ async def self(interaction: discord.Interaction):
 
 @tree.command(name = 'pet', description='Pet the pup!')
 async def self(interaction: discord.Interaction):
-    pet_response_list = ['Ruff!', 'Arf!!', 'Woof!', 'Bark!']
+    pet_response_list = ['Ruff!', 'Arf!!', 'Woof!', 'Bark!', 'Beep Boop Arf!']
 
     await interaction.response.send_message(random.choice(pet_response_list))
 
 @tree.command(name = 'freegames', description='Free Games on the Epic Games store!')
 async def self(interaction: discord.Interaction):
-    game_list = API_Call.callEpicAPI()[0]
+    game_list = Epic_API_Call.callEpicAPI()[0]
     embed_list = []
 
     for item in game_list:
-        embed=discord.Embed(title=f'**{item.title}**', description=item.desc, color=0xee0f14)
+        embed=discord.Embed(title=f'**{item.title}**', description=item.desc, color=0x8d1212)
         embed.set_author(name="Epic Store")
         embed.add_field(name='Original Price', value=f'~~{item.price}~~', inline=False)
         embed.add_field(name='Start Time', value=f'<t:{item.startTime}>', inline=True)
@@ -55,16 +56,39 @@ async def self(interaction: discord.Interaction):
 
 @tree.command(name = 'upcomingfreegames', description='Upcoming Free Games on the Epic Games Store!')
 async def self(interaction: discord.Interaction):
-    game_list = API_Call.callEpicAPI()[1]
+    game_list = Epic_API_Call.callEpicAPI()[1]
     embed_list = []
 
     for item in game_list:
-        embed=discord.Embed(title=item.title, description=item.desc, color=0xee0f14)
+        embed=discord.Embed(title=item.title, description=item.desc, color=0x8d1212)
         embed.set_author(name="Epic Store")
         embed.add_field(name='Original Price', value=f'~~{item.price}~~', inline=False)
         embed.add_field(name='Start Time', value=f'<t:{item.startTime}>', inline=True)
         embed.add_field(name='End Time', value=f'<t:{item.endTime}>', inline=True)
         embed.set_image(url=item.image_url)
+        embed_list.append(embed)
+
+    menu = ViewMenu(interaction, menu_type=ViewMenu.TypeEmbed)
+    for item in embed_list:
+        menu.add_page(item)
+
+    menu.add_button(ViewButton.back())
+    menu.add_button(ViewButton.next())
+
+    await menu.start()
+
+
+@tree.command(name = 'steamspecials', description='Specials & Sales on the Steam Store!')
+async def self(interaction: discord.Interaction):
+    game_list = Steam_API_Call.callSteamAPI()
+    embed_list = []
+
+    for item in game_list:
+        embed=discord.Embed(title=item.title, color=0x0000a0, url=item.store_link)
+        embed.set_author(name="Steam Store")
+        embed.add_field(name='Original Price', value=f'~~{item.original_price}~~', inline=True)
+        embed.add_field(name='Sale Price', value=item.sale_price, inline=True)
+        embed.set_image(url=item.header_image)
         embed_list.append(embed)
 
     menu = ViewMenu(interaction, menu_type=ViewMenu.TypeEmbed)
