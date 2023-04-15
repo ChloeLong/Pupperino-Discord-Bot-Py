@@ -7,7 +7,7 @@ Pupperino is a Discord bot written in the Discord.py library for Python! Being a
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install these packages.
 
 ```bash
-pip install discord.py
+pip install discord
 pip install reactionmenu
 
 ```
