@@ -23,5 +23,6 @@ class Steam_API_Call:
         newSpecial.sale_price = "${:.2f}".format(item['final_price'] / 100)
         newSpecial.header_image = item['header_image']
         newSpecial.store_link = f"https://store.steampowered.com/app/{item['id']}"
+        newSpecial.end_time = item['discount_expiration']
 
         return newSpecial

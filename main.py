@@ -88,6 +88,7 @@ async def self(interaction: discord.Interaction):
         embed.set_author(name="Steam Store")
         embed.add_field(name='Original Price', value=f'~~{item.original_price}~~', inline=True)
         embed.add_field(name='Sale Price', value=item.sale_price, inline=True)
+        embed.add_field(name='Offer Ends', value=f'<t:{item.end_time}>', inline=True)
         embed.set_image(url=item.header_image)
         embed_list.append(embed)
 

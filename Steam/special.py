@@ -1,17 +1,18 @@
 class Special:
-    def __init__(self, title=None, original_price=None, sale_price=None, header_image=None, store_link=None):
+    def __init__(self, title=None, original_price=None, sale_price=None, header_image=None, store_link=None, end_time=None):
         self.title = title
         self.original_price = original_price
         self.sale_price = sale_price
         self.header_image = header_image
         self.store_link = store_link
+        self.end_time = end_time
     
     def get_title(self):
         return self.title
     
     def set_title(self, title):
         self.title = title
-    
+
     def get_original_price(self):
         return self.original_price
     
@@ -35,3 +36,9 @@ class Special:
     
     def set_header_image(self, store_link):
         self.store_link = store_link
+
+    def get_end_time(self):
+        return self.end_time
+    
+    def set_end_time(self, end_time):
+        self.end_time = end_time
