@@ -18,4 +18,6 @@ __pycache__/
 *.db-journal
 *.db
 
-token.txt
+secret.py
+
+env/

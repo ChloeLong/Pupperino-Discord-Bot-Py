@@ -9,7 +9,6 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install these p
 ```bash
 pip install discord.py
 pip install reactionmenu
-pip install sqlite3
 
 ```
 

@@ -1,7 +1,8 @@
 import discord
 from discord import app_commands
-from EpicGames.database import Database
 from reactionmenu import ViewMenu, ViewButton
+from EpicGames.api_call import API_Call
+import secret
 
 class aclient(discord.Client):
     def __init__(self):
@@ -24,7 +25,7 @@ async def self(interaction: discord.Interaction):
 
 @tree.command(name = 'freegames', description='Free Games on the Epic Games store!')
 async def self(interaction: discord.Interaction):
-    game_list = Database.retrieveActive()
+    game_list = API_Call.callEpicAPI()[0]
     embed_list = []
 
     for item in game_list:
@@ -47,11 +48,12 @@ async def self(interaction: discord.Interaction):
 
 @tree.command(name = 'upcomingfreegames', description='Upcoming Free Games on the Epic Games Store!')
 async def self(interaction: discord.Interaction):
-    game_list = Database.retrieveUpcoming()
+    game_list = API_Call.callEpicAPI()[1]
     embed_list = []
 
     for item in game_list:
         embed=discord.Embed(title=item.title, description=item.desc, color=0xee0f14)
+        embed.set_author(name="Epic Store")
         embed.add_field(name='Original Price', value=f'~~{item.price}~~', inline=False)
         embed.add_field(name='Start Time', value=f'<t:{item.startTime}>', inline=True)
         embed.add_field(name='End Time', value=f'<t:{item.endTime}>', inline=True)
@@ -67,4 +69,4 @@ async def self(interaction: discord.Interaction):
 
     await menu.start()
 
-client.run(open("token.txt","r").readline().strip())
+client.run(secret.BOT_TOKEN)
