@@ -12,6 +12,15 @@ pip install reactionmenu
 
 ```
 
+## Commands
+
+```bash
+/ping - Pings Pupperino to make sure they are awake.
+/pet - Pet Pupperino!
+/epicfree - Shows free games on the Epic Games store.
+/steamspecials
+```
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first
