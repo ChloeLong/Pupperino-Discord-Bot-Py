@@ -1,11 +1,12 @@
 class Game:
-    def __init__(self, title=None, desc=None, price=None, startTime=None, endTime=None, image_url=None):
+    def __init__(self, title=None, desc=None, price=None, startTime=None, endTime=None, image_url=None, status=None):
         self.title = title
         self.desc = desc
         self.price = price
         self.startTime = startTime
         self.endTime = endTime
         self.image_url = image_url
+        self.status = status
         
     # Getter methods
     def get_title(self):
@@ -44,3 +45,9 @@ class Game:
 
     def set_image_url(self, image_url):
         self.image_url = image_url
+
+    def set_status(self, status):
+        self.status = status
+
+    def set_status(self, status):
+        self.status = status

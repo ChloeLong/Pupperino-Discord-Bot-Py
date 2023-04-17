@@ -32,6 +32,7 @@ class Epic_API_Call:
         newGame.startTime = Epic_API_Call.convertDate(item['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['startDate'])
         newGame.endTime = Epic_API_Call.convertDate(item['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['endDate'])
         newGame.image_url = item['keyImages'][0]['url']
+        newGame.status = 'Current'
 
         return newGame
 
@@ -43,5 +44,6 @@ class Epic_API_Call:
         newGame.startTime = Epic_API_Call.convertDate(item['promotions']['upcomingPromotionalOffers'][0]['promotionalOffers'][0]['startDate'])
         newGame.endTime = Epic_API_Call.convertDate(item['promotions']['upcomingPromotionalOffers'][0]['promotionalOffers'][0]['endDate'])
         newGame.image_url = item['keyImages'][0]['url']
+        newGame.status = 'Upcoming'
         
         return newGame

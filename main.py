@@ -31,40 +31,29 @@ async def self(interaction: discord.Interaction):
 
     await interaction.response.send_message(random.choice(pet_response_list))
 
-@tree.command(name = 'freegames', description='Free Games on the Epic Games store!')
+@tree.command(name = 'freeepicgames', description='Free Games on the Epic Games Store!')
 async def self(interaction: discord.Interaction):
-    game_list = Epic_API_Call.callEpicAPI()[0]
+    game_list_current = Epic_API_Call.callEpicAPI()[0]
+    game_list_upcoming = Epic_API_Call.callEpicAPI()[1]
     embed_list = []
 
-    for item in game_list:
+    for item in game_list_current:
         embed=discord.Embed(title=f'**{item.title}**', description=item.desc, color=0x8d1212)
         embed.set_author(name="Epic Store")
-        embed.add_field(name='Original Price', value=f'~~{item.price}~~', inline=False)
-        embed.add_field(name='Start Time', value=f'<t:{item.startTime}>', inline=True)
-        embed.add_field(name='End Time', value=f'<t:{item.endTime}>', inline=True)
+        embed.add_field(name='Original Price:', value=f'~~{item.price}~~', inline=False)
+        embed.add_field(name='Start Time:', value=f'<t:{item.startTime}>', inline=True)
+        embed.add_field(name='End Time:', value=f'<t:{item.endTime}>', inline=True)
+        embed.add_field(name='Status:', value=f'{item.status}', inline=True)
         embed.set_image(url=item.image_url)
         embed_list.append(embed)
 
-    menu = ViewMenu(interaction, menu_type=ViewMenu.TypeEmbed)
-    for item in embed_list:
-        menu.add_page(item)
-
-    menu.add_button(ViewButton.back())
-    menu.add_button(ViewButton.next())
-
-    await menu.start()
-
-@tree.command(name = 'upcomingfreegames', description='Upcoming Free Games on the Epic Games Store!')
-async def self(interaction: discord.Interaction):
-    game_list = Epic_API_Call.callEpicAPI()[1]
-    embed_list = []
-
-    for item in game_list:
-        embed=discord.Embed(title=item.title, description=item.desc, color=0x8d1212)
+    for item in game_list_upcoming:
+        embed=discord.Embed(title=f'**{item.title}**', description=item.desc, color=0x8d1212)
         embed.set_author(name="Epic Store")
-        embed.add_field(name='Original Price', value=f'~~{item.price}~~', inline=False)
-        embed.add_field(name='Start Time', value=f'<t:{item.startTime}>', inline=True)
-        embed.add_field(name='End Time', value=f'<t:{item.endTime}>', inline=True)
+        embed.add_field(name='Original Price:', value=f'~~{item.price}~~', inline=False)
+        embed.add_field(name='Start Time:', value=f'<t:{item.startTime}>', inline=True)
+        embed.add_field(name='End Time:', value=f'<t:{item.endTime}>', inline=True)
+        embed.add_field(name='Status:', value=f'{item.status}', inline=True)
         embed.set_image(url=item.image_url)
         embed_list.append(embed)
 
@@ -76,7 +65,6 @@ async def self(interaction: discord.Interaction):
     menu.add_button(ViewButton.next())
 
     await menu.start()
-
 
 @tree.command(name = 'steamspecials', description='Specials & Sales on the Steam Store!')
 async def self(interaction: discord.Interaction):
