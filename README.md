@@ -18,7 +18,7 @@ pip install reactionmenu
 /ping - Pings Pupperino to make sure they are awake.
 /pet - Pet Pupperino!
 /epicfree - Shows free games on the Epic Games store.
-/steamspecials
+/steamspecials - Shows specials and sales on the Steam store.
 ```
 
 ## Contributing
