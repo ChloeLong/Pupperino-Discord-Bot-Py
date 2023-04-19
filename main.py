@@ -2,6 +2,7 @@
 from EpicGames.api_call import Epic_API_Call
 from Steam.api_call import Steam_API_Call
 import secret
+import version
 
 # Outside Packages
 from discord import app_commands
@@ -101,5 +102,12 @@ async def self(interaction: discord.Interaction):
     menu.add_button(ViewButton.next())
 
     await menu.start()
+
+@tree.command(name = 'about', description='Find out more about Pupperino!')
+async def self(interaction: discord.Interaction):
+    embed = discord.Embed(title=f'Pupperino {version.VERSION}', description=f'Arf! I am currently serving {len(client.guilds)} Discord servers!\n\nThank you for using Pupperino!', colour=0xffffa6)
+    embed.set_thumbnail(url="https://i.imgur.com/WtWKT0K.jpg")
+    embed.set_footer(text="Created by CinderGN#0001")
+    await interaction.response.send_message(embed=embed)
 
 client.run(secret.BOT_TOKEN)
